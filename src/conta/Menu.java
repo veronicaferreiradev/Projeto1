@@ -1,16 +1,20 @@
 package conta;
 
-import conta.model.Conta;
-import conta.model.ContaCorrente;
-import conta.model.ContaPoupanca;
-
+import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import conta.model.ContaCorrente;
+import conta.model.ContaPoupanca;
 import conta.util.Cores;
 
 public class Menu {
 
 	public static void main(String[] args) {
+		
+		Scanner leia = new Scanner(System.in);
+		
+		int opcao = 0;
 		
 		//Teste da Classe Conta Corrente 
 		ContaCorrente cc1 = new ContaCorrente(2, 123, 1, "Mariana", 15000.0f, 1000.0f);
@@ -28,10 +32,6 @@ public class Menu {
 		cp1.depositar(5000.0f);
 		cp1.visualizar();
 		
-		Scanner leia = new Scanner(System.in);
-
-		int opcao;
-
 		while (true) {
 			
 			System.out.println(Cores.TEXT_BLUE_BOLD_BRIGHT + Cores.ANSI_BLACK_BACKGROUND);
@@ -55,11 +55,17 @@ public class Menu {
 			System.out.println("Digite a opção Desejada:                                  ");
 			System.out.println("                                                          ");
 
-			opcao = leia.nextInt();
+			try {
+					opcao = leia.nextInt();
+					
+			}catch (InputMismatchException e) {
+				System.out.println("\nDigite valore inteiros!");
+				leia.nextLine();
+				opcao = 0;
+			}
 
 			if (opcao == 9) {
 				System.out.println("\nBanco do Brazil com Z - O seu Futuro começa aqui!");
-				sobre();
 			leia.close();
 				System.exit(0);
 			}
@@ -111,6 +117,17 @@ public class Menu {
 		System.out.println("Projeto Desenvolvido por:                                   ");
 		System.out.println("Verônica Santos - vevef.santos@hotmail.com                  ");
 		System.out.println("https://github.com/veronicaferreiradev                      ");
+	}	
+	
+	public static void keyPress() {
+		
+		try {
+			System.out.println(Cores.TEXT_RESET + "\nPressione Enter para Continuar...");
+			System.in.read();
+			
+		} catch (IOException e) {
+			System.out.println("Você pressionou uma tecla diferente de enter!");
+		}
 	}
-
 }
+
