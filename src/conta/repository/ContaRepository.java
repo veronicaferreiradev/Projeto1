@@ -9,7 +9,7 @@ public interface ContaRepository {
 	public void listarTodas();
 	public void cadastrar(Conta conta);
 	public void atualizar (Conta conta);
-	public void deletar (Conta conta);
+	public void deletar (int numero);
 	
 	// métodos bancários 
 	public void sacar(int numero, float valor);
